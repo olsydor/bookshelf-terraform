@@ -74,10 +74,12 @@ resource "google_service_account" "app_sa" {
   display_name = "${var.app-name}-sa"
 }
 
-resource "google_project_iam_member" "role_binding" {
+resource "google_project_iam_custom_role" "my_custome_role" {
+  role_id = "my_custom_role"
   project = var.app-name
-  role    = "roles/editor"
-  member  = "serviceAccount:${google_service_account.app_sa.email}"
+  permissions = [ "value" ]
+  #role    = "roles/editor"
+  #member  = "serviceAccount:${google_service_account.app_sa.email}"
 }
 #(END-service-account)
 
